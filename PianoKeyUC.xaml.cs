@@ -1314,7 +1314,7 @@ namespace PianoApp
             }
         }
         /// <summary>
-        /// 处理鼠标离开事件
+        /// 处理触摸离开事件
         /// </summary>
         /// <param name="border"></param>
         /// <param name="e"></param>
@@ -1411,6 +1411,7 @@ namespace PianoApp
         private void border_TouchUp(object sender, TouchEventArgs e)
         {
             BorderLeftButtonUp((Border)sender);
+            e.Handled = true;
         }
         /// <summary>
         /// 触摸点击钢琴按键事件
@@ -1420,6 +1421,7 @@ namespace PianoApp
         private void border_TouchDown(object sender, TouchEventArgs e)
         {
             BorderLeftButtonDown((Border)sender);
+            e.Handled = true;
         }
 
         /// <summary>
@@ -1430,6 +1432,7 @@ namespace PianoApp
         private void border_TouchLeave(object sender, TouchEventArgs e)
         {
             BorderTouchLeave((Border)sender, e);
+            e.Handled = true;
         }
 
         /// <summary>
@@ -1440,6 +1443,7 @@ namespace PianoApp
         private void border_TouchEnter(object sender, TouchEventArgs e)
         {
             BorderTouchEnter((Border)sender, e);
+            e.Handled = true;
         }
         #endregion
 
