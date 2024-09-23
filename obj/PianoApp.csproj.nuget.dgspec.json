@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\我的地盘\\WPF\\Piano\\PianoAPP\\PianoApp.csproj": {}
+    "D:\\我的地盘\\公司\\金铎领创\\piano\\PianoAPP\\PianoApp.csproj": {}
   },
   "projects": {
-    "E:\\我的地盘\\WPF\\Piano\\PianoAPP\\PianoApp.csproj": {
+    "D:\\我的地盘\\公司\\金铎领创\\piano\\PianoAPP\\PianoApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\我的地盘\\WPF\\Piano\\PianoAPP\\PianoApp.csproj",
+        "projectUniqueName": "D:\\我的地盘\\公司\\金铎领创\\piano\\PianoAPP\\PianoApp.csproj",
         "projectName": "PianoApp",
-        "projectPath": "E:\\我的地盘\\WPF\\Piano\\PianoAPP\\PianoApp.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\我的地盘\\WPF\\Piano\\PianoAPP\\obj\\",
+        "projectPath": "D:\\我的地盘\\公司\\金铎领创\\piano\\PianoAPP\\PianoApp.csproj",
+        "packagesPath": "C:\\Users\\28654\\.nuget\\packages\\",
+        "outputPath": "D:\\我的地盘\\公司\\金铎领创\\piano\\PianoAPP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Users\\28654\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -28,7 +27,6 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\InstallSoftWare\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -71,7 +74,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-rc.1.23455.8\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

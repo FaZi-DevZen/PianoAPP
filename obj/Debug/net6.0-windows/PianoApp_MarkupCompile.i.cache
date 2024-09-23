@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\我的地盘\WPF\Piano\PianoAPP\obj\Debug\net6.0-windows\
+D:\我的地盘\公司\金铎领创\piano\PianoAPP\obj\Debug\net6.0-windows\
 PianoApp
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-E:\我的地盘\WPF\Piano\PianoAPP\App.xaml
+D:\我的地盘\公司\金铎领创\piano\PianoAPP\App.xaml
 21427535998
 
 61416529607
-2091323445919
+209-166497905
 MainWindow.xaml;PianoKeyUC.xaml;
 
-False
+True
 

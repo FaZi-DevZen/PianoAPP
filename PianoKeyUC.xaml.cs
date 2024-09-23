@@ -154,7 +154,7 @@ namespace PianoApp
         /// <returns></returns>
         private int SetNoteAsPerOctave(int note, int octave)
         {
-            int change = 0;//octave == 3
+            int change = 0;//octave == 4
             if (octave == 3)
                 change = -12;
             else if (octave == 2)
@@ -253,7 +253,6 @@ namespace PianoApp
             {
                 if (midiOutIndex == -1)
                     return;
-                //midiOut.Reset();
                 midiOut.Send(MidiMessage.StartNote(note, 127, 1).RawData);
                 Console.WriteLine("play note" + note);
             }
@@ -350,9 +349,13 @@ namespace PianoApp
             mBlackHeight = this.Height * (BLACK_KEY_HEIGHT_PERCENT / 100);
             mBlackWidth = 100.0 * (BLACK_KEY_WIDTH_PERCENT / 100); // 实际上这个宽度将是白键宽度的百分比
                                                                    // 这将在ResizeUI()中设置
-
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+            double scaleFactor = Math.Min(screenWidth / 1920, screenHeight / 1080); // 根据实际情况调整基准分辨率
             int gridCol = 0;
             int gridColumns = grd.ColumnDefinitions.Count;
+            double baseFontSizea = 25;
+            double baseFontSizeb = 13;
             // 白键和黑键交错
             for (int octaves = mStartOctave; octaves <= mStopOctave; octaves++)
             {
@@ -369,23 +372,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "C";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "C";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else if (gridCol == 8)
                         {
@@ -395,23 +402,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "D";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "D";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else if (gridCol == 9)
                         {
@@ -421,23 +432,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "E";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "E";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else if (gridCol == 10)
                         {
@@ -447,23 +462,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "F";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "F";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else if (gridCol == 11)
                         {
@@ -473,23 +492,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "G";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "G";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else if (gridCol == 12)
                         {
@@ -499,23 +522,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "A";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "A";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else if (gridCol == 13)
                         {
@@ -525,27 +552,27 @@ namespace PianoApp
                             border.Margin = new Thickness(0, 0, 0, 0);
                             border.BorderThickness = new Thickness(2);
                             border.BorderBrush = new SolidColorBrush(Colors.Black);
-                            if (octaves == mStartOctave && i == 0)
-                            {
-                                border.SizeChanged += border_SizeChanged;
-                            }
-                            TextBlock textBlock = new TextBlock();
-                            textBlock.Text = "B";
-                            if (SystemParameters.WorkArea.Width >= 1280)
-                            {
-                                textBlock.FontSize = 25;
-                            }
-                            else
-                            {
-                                textBlock.FontSize = 16;
-                            }
-                            textBlock.FontWeight = FontWeights.Bold;
-                            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-                            textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                            textBlock.Margin = new Thickness(5, 0, 5, 10);
-                            textBlock.IsHitTestVisible = false;
-                            border.Child = textBlock;
+                            StackPanel stackPanel = new StackPanel();
+                            stackPanel.Margin = new Thickness(0, 0, 0, 10);
+                            stackPanel.Orientation = Orientation.Horizontal;
+                            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                            stackPanel.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.IsHitTestVisible = false;
+                            TextBlock textBlocka = new TextBlock();
+                            textBlocka.Text = "B";
+                            textBlocka.FontSize = baseFontSizea * scaleFactor;
+                            textBlocka.FontWeight = FontWeights.Bold;
+                            textBlocka.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                            stackPanel.Children.Add(textBlocka);
+                            TextBlock textBlockb = new TextBlock();
+                            textBlockb.Text = "1";
+                            textBlockb.FontSize = baseFontSizeb * scaleFactor;
+                            textBlockb.FontWeight = FontWeights.Bold;
+                            textBlockb.Foreground = new SolidColorBrush(Colors.Black);
+                            textBlockb.VerticalAlignment = VerticalAlignment.Top;
+                            stackPanel.Children.Add(textBlockb);
+                            border.Child = stackPanel;
                         }
                         else
                         {
@@ -592,7 +619,11 @@ namespace PianoApp
                             border.Name = BKEY;
                             break;
                     }
-                    border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                    border.TouchDown += border_TouchDown;
+                    border.TouchUp += border_TouchUp;
+                    border.TouchLeave += border_TouchLeave;
+                    border.TouchEnter += border_TouchEnter;
+                    border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                     border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                     border.MouseEnter += border_MouseEnter;
                     border.MouseLeave += border_MouseLeave;
@@ -604,6 +635,7 @@ namespace PianoApp
                     Grid.SetColumn(border, gridCol);
                     grd.Children.Add(border);
                     whiteBorder.Add(border);
+                    baseFontSizea = 22;
                     if (i == 0)
                     {
                         //csharp
@@ -617,7 +649,11 @@ namespace PianoApp
                         border.BorderBrush = new SolidColorBrush(Colors.Black);
                         border.VerticalAlignment = VerticalAlignment.Top;
                         border.HorizontalAlignment = HorizontalAlignment.Center;
-                        border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                        border.TouchDown += border_TouchDown;
+                        border.TouchUp += border_TouchUp;
+                        border.TouchLeave += border_TouchLeave;
+                        border.TouchEnter += border_TouchEnter;
+                        border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                         border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                         border.MouseEnter += border_MouseEnter;
                         border.MouseLeave += border_MouseLeave;
@@ -637,36 +673,23 @@ namespace PianoApp
                                 stackPanel.Orientation = Orientation.Horizontal;
                                 stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanel.IsHitTestVisible = false;
-                                TextBlock textBlocka = new TextBlock();
-                                textBlocka.Text = "D";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlocka.FontSize = 22;
-                                    stackPanel.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlocka.FontSize = 16;
-                                    stackPanel.Height = 19;
-                                }
-                                textBlocka.FontWeight = FontWeights.Bold;
-                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
-                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanel.Children.Add(textBlocka);
+
                                 TextBlock textBlockb = new TextBlock();
-                                textBlockb.Text = "b";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockb.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockb.FontSize = 5;
-                                }
+                                textBlockb.Text = "\u266D";
+                                textBlockb.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockb.FontWeight = FontWeights.Bold;
                                 textBlockb.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockb.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanel.Children.Add(textBlockb);
+
+                                TextBlock textBlocka = new TextBlock();
+                                textBlocka.Text = "D";
+                                textBlocka.FontSize = baseFontSizea * scaleFactor;
+                                textBlocka.FontWeight = FontWeights.Bold;
+                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
+                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanel.Children.Add(textBlocka);
+
                                 stackPanelUD.Children.Add(stackPanel);
 
                                 StackPanel stackPanels = new StackPanel();
@@ -675,35 +698,21 @@ namespace PianoApp
                                 stackPanels.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanels.IsHitTestVisible = false;
                                 TextBlock textBlockc = new TextBlock();
-                                textBlockc.Text = "C";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockc.FontSize = 22;
-                                    stackPanels.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlockc.FontSize = 16;
-                                    stackPanels.Height = 19;
-                                }
-                                textBlockc.FontWeight = FontWeights.Bold;
-                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
-                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanels.Children.Add(textBlockc);
+
                                 TextBlock textBlockd = new TextBlock();
-                                textBlockd.Text = "#";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockd.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockd.FontSize = 5;
-                                }
+                                textBlockd.Text = "\u266F";
+                                textBlockd.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockd.FontWeight = FontWeights.Bold;
                                 textBlockd.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockd.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanels.Children.Add(textBlockd);
+
+                                textBlockc.Text = "C";
+                                textBlockc.FontSize = baseFontSizea * scaleFactor;
+                                textBlockc.FontWeight = FontWeights.Bold;
+                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
+                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanels.Children.Add(textBlockc);
 
                                 stackPanelUD.Children.Add(stackPanels);
                                 border.Child = stackPanelUD;
@@ -730,7 +739,11 @@ namespace PianoApp
                         border.BorderBrush = new SolidColorBrush(Colors.Black);
                         border.VerticalAlignment = VerticalAlignment.Top;
                         border.HorizontalAlignment = HorizontalAlignment.Center;
-                        border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                        border.TouchDown += border_TouchDown;
+                        border.TouchUp += border_TouchUp;
+                        border.TouchLeave += border_TouchLeave;
+                        border.TouchEnter += border_TouchEnter;
+                        border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                         border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                         border.MouseEnter += border_MouseEnter;
                         border.MouseLeave += border_MouseLeave;
@@ -750,36 +763,23 @@ namespace PianoApp
                                 stackPanel.Orientation = Orientation.Horizontal;
                                 stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanel.IsHitTestVisible = false;
-                                TextBlock textBlocka = new TextBlock();
-                                textBlocka.Text = "E";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlocka.FontSize = 22;
-                                    stackPanel.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlocka.FontSize = 16;
-                                    stackPanel.Height = 19;
-                                }
-                                textBlocka.FontWeight = FontWeights.Bold;
-                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
-                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanel.Children.Add(textBlocka);
+
                                 TextBlock textBlockb = new TextBlock();
-                                textBlockb.Text = "b";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockb.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockb.FontSize = 5;
-                                }
+                                textBlockb.Text = "\u266D";
+                                textBlockb.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockb.FontWeight = FontWeights.Bold;
                                 textBlockb.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockb.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanel.Children.Add(textBlockb);
+
+                                TextBlock textBlocka = new TextBlock();
+                                textBlocka.Text = "E";
+                                textBlocka.FontSize = baseFontSizea * scaleFactor;
+                                textBlocka.FontWeight = FontWeights.Bold;
+                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
+                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanel.Children.Add(textBlocka);
+
                                 stackPanelUD.Children.Add(stackPanel);
 
 
@@ -788,36 +788,22 @@ namespace PianoApp
                                 stackPanels.Orientation = Orientation.Horizontal;
                                 stackPanels.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanels.IsHitTestVisible = false;
-                                TextBlock textBlockc = new TextBlock();
-                                textBlockc.Text = "D";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockc.FontSize = 22;
-                                    stackPanels.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlockc.FontSize = 16;
-                                    stackPanels.Height = 19;
-                                }
-                                textBlockc.FontWeight = FontWeights.Bold;
-                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
-                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanels.Children.Add(textBlockc);
+
                                 TextBlock textBlockd = new TextBlock();
-                                textBlockd.Text = "#";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockd.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockd.FontSize = 5;
-                                }
+                                textBlockd.Text = "\u266F";
+                                textBlockd.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockd.FontWeight = FontWeights.Bold;
                                 textBlockd.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockd.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanels.Children.Add(textBlockd);
+
+                                TextBlock textBlockc = new TextBlock();
+                                textBlockc.Text = "D";
+                                textBlockc.FontSize = baseFontSizea * scaleFactor;
+                                textBlockc.FontWeight = FontWeights.Bold;
+                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
+                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanels.Children.Add(textBlockc);
 
                                 stackPanelUD.Children.Add(stackPanels);
                                 border.Child = stackPanelUD;
@@ -848,7 +834,11 @@ namespace PianoApp
                         border.BorderBrush = new SolidColorBrush(Colors.Black);
                         border.VerticalAlignment = VerticalAlignment.Top;
                         border.HorizontalAlignment = HorizontalAlignment.Center;
-                        border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                        border.TouchDown += border_TouchDown;
+                        border.TouchUp += border_TouchUp;
+                        border.TouchLeave += border_TouchLeave;
+                        border.TouchEnter += border_TouchEnter;
+                        border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                         border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                         border.MouseEnter += border_MouseEnter;
                         border.MouseLeave += border_MouseLeave;
@@ -868,36 +858,23 @@ namespace PianoApp
                                 stackPanel.Orientation = Orientation.Horizontal;
                                 stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanel.IsHitTestVisible = false;
-                                TextBlock textBlocka = new TextBlock();
-                                textBlocka.Text = "G";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlocka.FontSize = 22;
-                                    stackPanel.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlocka.FontSize = 16;
-                                    stackPanel.Height = 19;
-                                }
-                                textBlocka.FontWeight = FontWeights.Bold;
-                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
-                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanel.Children.Add(textBlocka);
+
                                 TextBlock textBlockb = new TextBlock();
-                                textBlockb.Text = "b";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockb.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockb.FontSize = 5;
-                                }
+                                textBlockb.Text = "\u266D";
+                                textBlockb.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockb.FontWeight = FontWeights.Bold;
                                 textBlockb.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockb.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanel.Children.Add(textBlockb);
+
+                                TextBlock textBlocka = new TextBlock();
+                                textBlocka.Text = "G";
+                                textBlocka.FontSize = baseFontSizea * scaleFactor;
+                                textBlocka.FontWeight = FontWeights.Bold;
+                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
+                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanel.Children.Add(textBlocka);
+
                                 stackPanelUD.Children.Add(stackPanel);
 
 
@@ -906,36 +883,22 @@ namespace PianoApp
                                 stackPanels.Orientation = Orientation.Horizontal;
                                 stackPanels.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanels.IsHitTestVisible = false;
-                                TextBlock textBlockc = new TextBlock();
-                                textBlockc.Text = "F";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockc.FontSize = 22;
-                                    stackPanels.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlockc.FontSize = 16;
-                                    stackPanels.Height = 19;
-                                }
-                                textBlockc.FontWeight = FontWeights.Bold;
-                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
-                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanels.Children.Add(textBlockc);
+
                                 TextBlock textBlockd = new TextBlock();
-                                textBlockd.Text = "#";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockd.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockd.FontSize = 5;
-                                }
+                                textBlockd.Text = "\u266F";
+                                textBlockd.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockd.FontWeight = FontWeights.Bold;
                                 textBlockd.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockd.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanels.Children.Add(textBlockd);
+
+                                TextBlock textBlockc = new TextBlock();
+                                textBlockc.Text = "F";
+                                textBlockc.FontSize = baseFontSizea * scaleFactor;
+                                textBlockc.FontWeight = FontWeights.Bold;
+                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
+                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanels.Children.Add(textBlockc);
 
                                 stackPanelUD.Children.Add(stackPanels);
                                 border.Child = stackPanelUD;
@@ -961,7 +924,11 @@ namespace PianoApp
                         border.BorderBrush = new SolidColorBrush(Colors.Black);
                         border.VerticalAlignment = VerticalAlignment.Top;
                         border.HorizontalAlignment = HorizontalAlignment.Center;
-                        border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                        border.TouchDown += border_TouchDown;
+                        border.TouchUp += border_TouchUp;
+                        border.TouchLeave += border_TouchLeave;
+                        border.TouchEnter += border_TouchEnter;
+                        border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                         border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                         border.MouseEnter += border_MouseEnter;
                         border.MouseLeave += border_MouseLeave;
@@ -981,36 +948,23 @@ namespace PianoApp
                                 stackPanel.Orientation = Orientation.Horizontal;
                                 stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanel.IsHitTestVisible = false;
-                                TextBlock textBlocka = new TextBlock();
-                                textBlocka.Text = "A";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlocka.FontSize = 22;
-                                    stackPanel.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlocka.FontSize = 16;
-                                    stackPanel.Height = 19;
-                                }
-                                textBlocka.FontWeight = FontWeights.Bold;
-                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
-                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanel.Children.Add(textBlocka);
+
                                 TextBlock textBlockb = new TextBlock();
-                                textBlockb.Text = "b";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockb.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockb.FontSize = 5;
-                                }
+                                textBlockb.Text = "\u266D";
+                                textBlockb.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockb.FontWeight = FontWeights.Bold;
                                 textBlockb.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockb.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanel.Children.Add(textBlockb);
+
+                                TextBlock textBlocka = new TextBlock();
+                                textBlocka.Text = "A";
+                                textBlocka.FontSize = baseFontSizea * scaleFactor;
+                                textBlocka.FontWeight = FontWeights.Bold;
+                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
+                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanel.Children.Add(textBlocka);
+
                                 stackPanelUD.Children.Add(stackPanel);
 
 
@@ -1019,36 +973,22 @@ namespace PianoApp
                                 stackPanels.Orientation = Orientation.Horizontal;
                                 stackPanels.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanels.IsHitTestVisible = false;
-                                TextBlock textBlockc = new TextBlock();
-                                textBlockc.Text = "G";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockc.FontSize = 22;
-                                    stackPanels.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlockc.FontSize = 16;
-                                    stackPanels.Height = 19;
-                                }
-                                textBlockc.FontWeight = FontWeights.Bold;
-                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
-                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanels.Children.Add(textBlockc);
+
                                 TextBlock textBlockd = new TextBlock();
-                                textBlockd.Text = "#";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockd.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockd.FontSize = 5;
-                                }
+                                textBlockd.Text = "\u266F";
+                                textBlockd.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockd.FontWeight = FontWeights.Bold;
                                 textBlockd.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockd.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanels.Children.Add(textBlockd);
+
+                                TextBlock textBlockc = new TextBlock();
+                                textBlockc.Text = "G";
+                                textBlockc.FontSize = baseFontSizea * scaleFactor;
+                                textBlockc.FontWeight = FontWeights.Bold;
+                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
+                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanels.Children.Add(textBlockc);
 
                                 stackPanelUD.Children.Add(stackPanels);
                                 border.Child = stackPanelUD;
@@ -1074,7 +1014,11 @@ namespace PianoApp
                         border.BorderBrush = new SolidColorBrush(Colors.Black);
                         border.VerticalAlignment = VerticalAlignment.Top;
                         border.HorizontalAlignment = HorizontalAlignment.Center;
-                        border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                        border.TouchDown += border_TouchDown;
+                        border.TouchUp += border_TouchUp;
+                        border.TouchLeave += border_TouchLeave;
+                        border.TouchEnter += border_TouchEnter;
+                        border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                         border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                         border.MouseEnter += border_MouseEnter;
                         border.MouseLeave += border_MouseLeave;
@@ -1094,36 +1038,23 @@ namespace PianoApp
                                 stackPanel.Orientation = Orientation.Horizontal;
                                 stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanel.IsHitTestVisible = false;
-                                TextBlock textBlocka = new TextBlock();
-                                textBlocka.Text = "B";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlocka.FontSize = 22;
-                                    stackPanel.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlocka.FontSize = 16;
-                                    stackPanel.Height = 19;
-                                }
-                                textBlocka.FontWeight = FontWeights.Bold;
-                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
-                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanel.Children.Add(textBlocka);
+
                                 TextBlock textBlockb = new TextBlock();
-                                textBlockb.Text = "b";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockb.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockb.FontSize = 5;
-                                }
+                                textBlockb.Text = "\u266D";
+                                textBlockb.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockb.FontWeight = FontWeights.Bold;
                                 textBlockb.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockb.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanel.Children.Add(textBlockb);
+
+                                TextBlock textBlocka = new TextBlock();
+                                textBlocka.Text = "B";
+                                textBlocka.FontSize = baseFontSizea * scaleFactor;
+                                textBlocka.FontWeight = FontWeights.Bold;
+                                textBlocka.Foreground = new SolidColorBrush(Colors.White);
+                                textBlocka.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanel.Children.Add(textBlocka);
+
                                 stackPanelUD.Children.Add(stackPanel);
 
 
@@ -1132,36 +1063,22 @@ namespace PianoApp
                                 stackPanels.Orientation = Orientation.Horizontal;
                                 stackPanels.HorizontalAlignment = HorizontalAlignment.Center;
                                 stackPanels.IsHitTestVisible = false;
-                                TextBlock textBlockc = new TextBlock();
-                                textBlockc.Text = "A";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockc.FontSize = 22;
-                                    stackPanels.Height = 30;
-                                }
-                                else
-                                {
-                                    textBlockc.FontSize = 16;
-                                    stackPanels.Height = 19;
-                                }
-                                textBlockc.FontWeight = FontWeights.Bold;
-                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
-                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
-                                stackPanels.Children.Add(textBlockc);
+
                                 TextBlock textBlockd = new TextBlock();
-                                textBlockd.Text = "#";
-                                if (SystemParameters.WorkArea.Width >= 1280)
-                                {
-                                    textBlockd.FontSize = 13;
-                                }
-                                else
-                                {
-                                    textBlockd.FontSize = 5;
-                                }
+                                textBlockd.Text = "\u266F";
+                                textBlockd.FontSize = baseFontSizeb * scaleFactor;
                                 textBlockd.FontWeight = FontWeights.Bold;
                                 textBlockd.Foreground = new SolidColorBrush(Colors.White);
                                 textBlockd.VerticalAlignment = VerticalAlignment.Top;
                                 stackPanels.Children.Add(textBlockd);
+
+                                TextBlock textBlockc = new TextBlock();
+                                textBlockc.Text = "A";
+                                textBlockc.FontSize = baseFontSizea * scaleFactor;
+                                textBlockc.FontWeight = FontWeights.Bold;
+                                textBlockc.Foreground = new SolidColorBrush(Colors.White);
+                                textBlockc.VerticalAlignment = VerticalAlignment.Bottom;
+                                stackPanels.Children.Add(textBlockc);
 
                                 stackPanelUD.Children.Add(stackPanels);
                                 border.Child = stackPanelUD;
@@ -1195,7 +1112,11 @@ namespace PianoApp
                 border.Margin = new Thickness(0, 0, 0, 0);
                 border.BorderThickness = new Thickness(2);
                 border.BorderBrush = new SolidColorBrush(Colors.Black);
-                border.MouseLeftButtonDown += border_MouseLeftButtonDown; ;
+                border.TouchDown += border_TouchDown;
+                border.TouchUp += border_TouchUp;
+                border.TouchLeave += border_TouchLeave;
+                border.TouchEnter += border_TouchEnter;
+                border.MouseLeftButtonDown += border_MouseLeftButtonDown;
                 border.MouseLeftButtonUp += border_MouseLeftButtonUp;
                 border.MouseEnter += border_MouseEnter;
                 border.MouseLeave += border_MouseLeave;
@@ -1207,12 +1128,10 @@ namespace PianoApp
                 grd.Children.Add(border);
                 whiteBorder.Add(border);
             }
-            #endregion
 
+            #endregion
             mLoaded = true;
         }
-
-
 
         /// <summary>
         /// 检查矩形是否为黑键
@@ -1275,7 +1194,7 @@ namespace PianoApp
         {
             if (!mLoaded)
                 return;
-            grd.Width = this.ActualWidth;
+            grd.Width = this.ActualWidth - 30;
             grd.Height = this.ActualHeight;
 
             Border border = whiteBorder[0];
@@ -1332,7 +1251,7 @@ namespace PianoApp
         public void UnHighlightKey(Border border, bool isBlack)
         {
             if (!isBlack)
-                border.Background = new SolidColorBrush(Colors.Ivory);
+                border.Background = new SolidColorBrush(Colors.White);
             else
             {
                 border.Background = new SolidColorBrush(Colors.Black);
@@ -1394,6 +1313,16 @@ namespace PianoApp
                 StopNote(SetNoteAsPerOctave(NoteNameToSound(border.Name), (int)border.Tag));
             }
         }
+        /// <summary>
+        /// 处理鼠标离开事件
+        /// </summary>
+        /// <param name="border"></param>
+        /// <param name="e"></param>
+        private void BorderTouchLeave(Border border, TouchEventArgs e)
+        {
+            UnHighlightKey(border, IsBlackBorder(border));
+            StopNote(SetNoteAsPerOctave(NoteNameToSound(border.Name), (int)border.Tag));
+        }
 
         /// <summary>
         /// 处理鼠标进入事件
@@ -1408,14 +1337,19 @@ namespace PianoApp
                 HighlightKey(border, IsBlackBorder(border));
                 PlayNote(SetNoteAsPerOctave(NoteNameToSound(border.Name), (int)border.Tag));
             }
+        }
+        private void BorderTouchEnter(Border border, TouchEventArgs e)
+        {
+            HighlightKey(border, IsBlackBorder(border));
+            PlayNote(SetNoteAsPerOctave(NoteNameToSound(border.Name), (int)border.Tag));
 
         }
-
         #endregion ****************************************************************************************
 
 
         #region 钢琴按键Border事件处理***************************************************************************
 
+        #region 鼠标操作事件处理
         /// <summary>
         /// 鼠标左键点击矩形事件
         /// </summary>
@@ -1423,9 +1357,11 @@ namespace PianoApp
         /// <param name="e"></param>
         private void border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            BorderLeftButtonDown((Border)sender);
+            if (e.StylusDevice == null)//判断当前不是触摸操作
+            {
+                BorderLeftButtonDown((Border)sender);
+            }
         }
-
         /// <summary>
         /// 鼠标左键抬起矩形事件
         /// </summary>
@@ -1433,7 +1369,10 @@ namespace PianoApp
         /// <param name="e"></param>
         private void border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            BorderLeftButtonUp((Border)sender);
+            if (e.StylusDevice == null)//判断当前不是触摸操作
+            {
+                BorderLeftButtonUp((Border)sender);
+            }
         }
 
         /// <summary>
@@ -1443,7 +1382,10 @@ namespace PianoApp
         /// <param name="e"></param>
         private void border_MouseLeave(object sender, MouseEventArgs e)
         {
-            BorderMouseLeave((Border)sender, e);
+            if (e.StylusDevice == null)//判断当前不是触摸操作
+            {
+                BorderMouseLeave((Border)sender, e);
+            }
         }
 
         /// <summary>
@@ -1453,8 +1395,54 @@ namespace PianoApp
         /// <param name="e"></param>
         private void border_MouseEnter(object sender, MouseEventArgs e)
         {
-            BorderMouseEnter((Border)sender, e);
+            if (e.StylusDevice == null)//判断当前不是触摸操作
+            {
+                BorderMouseEnter((Border)sender, e);
+            }
         }
+        #endregion
+
+        #region 触摸操作事件处理
+        /// <summary>
+        /// 触摸抬起钢琴按键事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void border_TouchUp(object sender, TouchEventArgs e)
+        {
+            BorderLeftButtonUp((Border)sender);
+        }
+        /// <summary>
+        /// 触摸点击钢琴按键事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void border_TouchDown(object sender, TouchEventArgs e)
+        {
+            BorderLeftButtonDown((Border)sender);
+        }
+
+        /// <summary>
+        ///  触摸移出矩形事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void border_TouchLeave(object sender, TouchEventArgs e)
+        {
+            BorderTouchLeave((Border)sender, e);
+        }
+
+        /// <summary>
+        /// 触摸进入矩形事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void border_TouchEnter(object sender, TouchEventArgs e)
+        {
+            BorderTouchEnter((Border)sender, e);
+        }
+        #endregion
+
 
         /// <summary>
         /// 矩形大小变化事件
@@ -1497,14 +1485,14 @@ namespace PianoApp
         {
             ListDevices();
             SetNotes();
-            //if (3 == 5)
-            //{
-            //    SetOctave(3);
-            //}
-            //else
-            //{
-            //    SetMultipleOctaves(3, 5);
-            //}
+            if (3 == 5)
+            {
+                SetOctave(3);
+            }
+            else
+            {
+                SetMultipleOctaves(3, 5);
+            }
         }
 
         /// <summary>
@@ -1516,6 +1504,5 @@ namespace PianoApp
         {
             ResizeUI();
         }
-
     }
 }

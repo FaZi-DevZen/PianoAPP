@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PianoApp
-build_property.ProjectDir = E:\我的地盘\WPF\Piano\PianoAPP\
+build_property.ProjectDir = D:\我的地盘\公司\金铎领创\piano\PianoAPP\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
